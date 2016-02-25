@@ -30,10 +30,10 @@ plotTrajectory <- function (start) {
   arrows(start[1], start[2], 
          start[1] + net_beta[1]/5, start[2] + net_beta[2]/5, 
          pch = 18, length = 0.14, lwd = 2.5, col = 'red')
-  net_delta = G %*% net_beta
-  arrows(start[1], start[2], 
-         start[1] + net_delta[1], start[2] + net_delta[2], 
-         pch = 18, length = 0.14, lwd = 2.5, col = 'black')
+#  net_delta = G %*% net_beta
+#  arrows(start[1], start[2], 
+#         start[1] + net_delta[1], start[2] + net_delta[2], 
+#         pch = 18, length = 0.14, lwd = 2.5, col = 'black')
 }
 
 w_cov = matrix(c(1, 0.7, 0.7, 1), ncol = 2)
