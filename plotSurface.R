@@ -38,7 +38,13 @@ plotTrajectory <- function (start) {
 
 w_cov = matrix(c(1, 0.7, 0.7, 1), ncol = 2)
 G = matrix(c(1, 0.8, 0.8, 1)/2, ncol = 2)
-cov2cor(G)
+
+es = eigen(cov2cor(G))$values
+v1 = sqrt(es[1])/1.2 * eigen(cov2cor(G))$vectors[,1]
+v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
+
+gen = 8
+
 W_bar = function(x) {
     log(
     dmvnorm(x, mean = c(4, 5), sigma = w_cov) + 
@@ -58,12 +64,6 @@ for(i in 1:nrow(X)){
 }
 Z = exp(Z - log(sum(exp(Z))))
 b <- matrix(Z, length(x))
-
-grad = grad(W_bar, c(5, 5)) 
-gen = 10
-es = eigen(cov2cor(G))$values
-v1 = sqrt(es[1])/1.2 * eigen(cov2cor(G))$vectors[,1]
-v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
 
 mypalette = colorRampPalette(c(wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
 png("multipeaklandscape.png", width = 1000, height = 900)
