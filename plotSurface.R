@@ -89,8 +89,8 @@ W_bar = function(x) {
     dmvnorm(x, mean = c(3, 3), sigma = w_cov))
 }
 
-x <- seq(0, 6, 0.1) ## valores para mu
-y <- seq(-1, 5, 0.1)
+x <- seq(0, 6.5, 0.1) ## valores para mu
+y <- seq(0, 6, 0.1)
 X <- as.matrix( expand.grid(x, y))
 colnames(X) <- c("mu","var")
 Z <- vector()
@@ -109,9 +109,9 @@ filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = { 
                  axis(1); 
                  axis(2);
-                 plotTrajectory(c(1.8,4))
-                 plotTrajectory(c(1.5,0))
-                 plotTrajectory(c(5,4))
+                 plotTrajectory(c(2,4))
+                 plotTrajectory(c(1,1))
+                 plotTrajectory(c(5.5,3))
                }
 )
 dev.off(dev.cur())
