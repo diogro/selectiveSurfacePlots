@@ -24,7 +24,7 @@ plotTrajectory <- function (start) {
            next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5)
     arrows(current_gen[1], current_gen[2], 
            current_gen[1] + beta[1]/5, current_gen[2] + beta[2]/5, 
-           pch = 18, length = 0.14, lwd = 2.5, col = 'purple')
+           pch = 18, length = 0.14, lwd = 2.5, col = 'aquamarine4')
     current_gen = next_gen
   }
   arrows(start[1], start[2], 
@@ -65,7 +65,7 @@ es = eigen(cov2cor(G))$values
 v1 = sqrt(es[1])/1.2 * eigen(cov2cor(G))$vectors[,1]
 v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
 
-mypalette = colorRampPalette(wes_palette(10, name = "Zissou", type = "continuous"))
+mypalette = colorRampPalette(c(wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
 png("multipeaklandscape.png", width = 1000, height = 900)
 filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = { 
@@ -76,7 +76,7 @@ filled.contour(x, y, z = b, color.palette = mypalette,
                  plotTrajectory(c(5,4))
                }
 )
-dev.off()
+dev.off(dev.cur())
 
 
 #################################33
@@ -114,4 +114,4 @@ filled.contour(x, y, z = b, color.palette = mypalette,
                  plotTrajectory(c(5,4))
                }
 )
-dev.off()
+dev.off(dev.cur())
