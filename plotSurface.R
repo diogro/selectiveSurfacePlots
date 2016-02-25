@@ -8,7 +8,7 @@ library(wesanderson)
 
 plotTrajectory <- function (start) {
   current_gen = start
-  polygon(ellipse(0.8, centre = current_gen, level = 0.3), col = "darkgray")
+  polygon(ellipse(0.8, centre = current_gen, level = 0.3), col = wes_palette("Royal1")[1])
   segments(current_gen[1] - v1[1], current_gen[2] - v1[2], 
            current_gen[1] + v1[1], current_gen[2] + v1[2], lwd = 2) 
   segments(current_gen[1] - v2[1], current_gen[2] - v2[2], 
@@ -24,12 +24,12 @@ plotTrajectory <- function (start) {
            next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5)
     arrows(current_gen[1], current_gen[2], 
            current_gen[1] + beta[1]/5, current_gen[2] + beta[2]/5, 
-           pch = 18, length = 0.14, lwd = 2.5, col = 'aquamarine4')
+           pch = 18, length = 0.14, lwd = 2.5, col = wes_palette("Rushmore")[3])
     current_gen = next_gen
   }
   arrows(start[1], start[2], 
          start[1] + net_beta[1]/5, start[2] + net_beta[2]/5, 
-         pch = 18, length = 0.14, lwd = 2.5, col = 'red')
+         pch = 18, length = 0.14, lwd = 2.5, col = wes_palette("FantasticFox")[5])
 #  net_delta = G %*% net_beta
 #  arrows(start[1], start[2], 
 #         start[1] + net_delta[1], start[2] + net_delta[2], 
