@@ -21,10 +21,10 @@ plotTrajectory <- function (start) {
     net_beta = net_beta + beta
     next_gen = current_gen + G%*%beta
     arrows(current_gen[1], current_gen[2], 
-           next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5)
+           next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5, col = "black")
     arrows(current_gen[1], current_gen[2], 
            current_gen[1] + beta[1]/5, current_gen[2] + beta[2]/5, 
-           pch = 18, length = 0.14, lwd = 2.5, col = wes_palette("Rushmore")[3])
+           pch = 18, length = 0.14, lwd = 3, col = wes_palette("Rushmore")[3])
     current_gen = next_gen
   }
   arrows(start[1], start[2], 
