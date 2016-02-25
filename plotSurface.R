@@ -43,12 +43,12 @@ es = eigen(cov2cor(G))$values
 v1 = sqrt(es[1])/1.2 * eigen(cov2cor(G))$vectors[,1]
 v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
 
-gen = 8
+gen = 15
 
 W_bar = function(x) {
     log(
     dmvnorm(x, mean = c(4, 5), sigma = w_cov) + 
-    dmvnorm(x, mean = c(1, 5), sigma = w_cov) + 
+    1.1*dmvnorm(x, mean = c(1, 5), sigma = w_cov) + 
     dmvnorm(x, mean = c(2, 2), sigma = w_cov) + 
     dmvnorm(x, mean = c(7, 5), sigma = w_cov) + 
     dmvnorm(x, mean = c(5, 2), sigma = w_cov))
@@ -71,7 +71,7 @@ filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = { 
                  axis(1); 
                  axis(2);
-                 plotTrajectory(c(1.8,4))
+                 plotTrajectory(c(1.8,4.03))
                  plotTrajectory(c(1.5,0))
                  plotTrajectory(c(5,4))
                }
