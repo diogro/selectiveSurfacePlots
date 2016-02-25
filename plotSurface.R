@@ -72,7 +72,7 @@ filled.contour(x, y, z = b, color.palette = mypalette,
                  axis(1); 
                  axis(2);
                  plotTrajectory(c(1.8,4.03))
-                 plotTrajectory(c(1.5,0))
+                 plotTrajectory(c(0.25,0.25))
                  plotTrajectory(c(5,4))
                }
 )
