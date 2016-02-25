@@ -50,7 +50,8 @@ filled.contour(x, y, z = b, color.palette = mypallete,
                  points(current_gen[1], current_gen[2], pch = 19)
                  for(i in 1:gen){
                    next_gen = current_gen + G%*%grad(W_bar, t(current_gen))
-                   arrows(current_gen[1], current_gen[2], next_gen[1], next_gen[2], pch = 18, length = 0.14)
+                   arrows(current_gen[1], current_gen[2], 
+                          next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5)
                    current_gen = next_gen
                  }
                  current_gen = c(1.5,0)
@@ -63,7 +64,8 @@ filled.contour(x, y, z = b, color.palette = mypallete,
                  points(current_gen[1], current_gen[2], pch = 19)
                  for(i in 1:gen){
                    next_gen = current_gen + G%*%grad(W_bar, t(current_gen))
-                   arrows(current_gen[1], current_gen[2], next_gen[1], next_gen[2], pch = 18, length = 0.14)
+                   arrows(current_gen[1], current_gen[2], 
+                          next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5)
                    current_gen = next_gen
                  }
                  current_gen = c(5,4)
@@ -76,7 +78,8 @@ filled.contour(x, y, z = b, color.palette = mypallete,
                  points(current_gen[1], current_gen[2], pch = 19)
                  for(i in 1:gen){
                    next_gen = current_gen + G%*%grad(W_bar, t(current_gen))
-                   arrows(current_gen[1], current_gen[2], next_gen[1], next_gen[2], pch = 18, length = 0.14)
+                   arrows(current_gen[1], current_gen[2], 
+                          next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5)
                    current_gen = next_gen
                  }
                }
