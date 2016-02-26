@@ -12,7 +12,6 @@ plotTrajectory <- function (start) {
            current_gen[1] + v1[1], current_gen[2] + v1[2], lwd = 2) 
   segments(current_gen[1] - v2[1], current_gen[2] - v2[2], 
            current_gen[1] + v2[1], current_gen[2] + v2[2], lwd = 2) 
-  
   points(current_gen[1], current_gen[2], pch = 19)
   net_beta = c(0, 0)
   for(i in 1:gen){
@@ -63,8 +62,7 @@ W_bar = function(x) {
 }
 x <- seq(-1.5, 8.5, step) ## valores para mu
 y <- seq(-1.5, 8.5, step)
-X <- as.matrix( expand.grid(x, y))
-colnames(X) <- c("mu","var")
+X <- as.matrix(expand.grid(x, y))
 Z <- vector()
 for(i in 1:nrow(X)){
   Z[i] <- W_bar(c(X[i,1], X[i,2]))
@@ -72,7 +70,7 @@ for(i in 1:nrow(X)){
 Z = exp(Z - log(sum(exp(Z))))
 b <- matrix(Z, length(x))
 
-png("multipeaklandscape.png", width = 1000, height = 900)
+png("multipeaklandscape.png", width = 1080, height = 900)
 filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = { 
                  axis(1); 
@@ -94,8 +92,7 @@ W_bar = function(x) {
 
 x <- seq(0, 6.5, step) ## valores para mu
 y <- seq(-0.5, 6, step)
-X <- as.matrix( expand.grid(x, y))
-colnames(X) <- c("mu","var")
+X <- as.matrix(expand.grid(x, y))
 Z <- vector()
 for(i in 1:nrow(X)){
   Z[i] <- W_bar(c(X[i,1], X[i,2]))
@@ -103,7 +100,7 @@ for(i in 1:nrow(X)){
 Z = exp(Z - log(sum(exp(Z))))
 b <- matrix(Z, length(x))
 
-png("singlepeaklandscape.png", width = 1000, height = 900)
+png("singlepeaklandscape.png", width = 1080, height = 900)
 filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = { 
                  axis(1); 
