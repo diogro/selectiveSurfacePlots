@@ -88,10 +88,8 @@ dev.off(dev.cur())
 # Single Peak
 #################################
 
-
 W_bar = function(x) {
-  log(
-    dmvnorm(x, mean = c(3, 3), sigma = w_cov))
+  log(dmvnorm(x, mean = c(3, 3), sigma = w_cov))
 }
 
 x <- seq(0, 6.5, step) ## valores para mu
