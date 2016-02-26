@@ -5,7 +5,6 @@ library(ellipse)
 library(grDevices)
 library(wesanderson)
 
-
 plotTrajectory <- function (start) {
   current_gen = start
   polygon(ellipse(0.8, centre = current_gen, level = 0.3), col = wes_palette("Royal1")[1])
@@ -36,14 +35,23 @@ plotTrajectory <- function (start) {
 #         pch = 18, length = 0.14, lwd = 2.5, col = 'black')
 }
 
-w_cov = matrix(c(1, 0.7, 0.7, 1), ncol = 2)
-G = matrix(c(1, 0.8, 0.8, 1)/2, ncol = 2)
+w_cov = matrix(c(1.0, 0.7, 
+                 0.7, 1.0), ncol = 2)
+G = matrix(c(1.0, 0.8, 
+             0.8, 1.0)/2, ncol = 2)
 
 es = eigen(cov2cor(G))$values
 v1 = sqrt(es[1])/1.2 * eigen(cov2cor(G))$vectors[,1]
 v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
 
 gen = 15
+step = 0.1
+
+mypalette = colorRampPalette(c(wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
+
+#################################
+# Multiple Peaks
+#################################
 
 W_bar = function(x) {
     log(
@@ -53,7 +61,6 @@ W_bar = function(x) {
     dmvnorm(x, mean = c(7, 5), sigma = w_cov) + 
     dmvnorm(x, mean = c(5, 2), sigma = w_cov))
 }
-step = 0.1
 x <- seq(-1.5, 8.5, step) ## valores para mu
 y <- seq(-1.5, 8.5, step)
 X <- as.matrix( expand.grid(x, y))
@@ -65,21 +72,19 @@ for(i in 1:nrow(X)){
 Z = exp(Z - log(sum(exp(Z))))
 b <- matrix(Z, length(x))
 
-mypalette = colorRampPalette(c(wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
 png("multipeaklandscape.png", width = 1000, height = 900)
 filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = { 
                  axis(1); 
                  axis(2);
-                 plotTrajectory(c(1.8,4.03))
+                 plotTrajectory(c( 1.8,4.03))
                  plotTrajectory(c(0.25,0.25))
-                 plotTrajectory(c(5,4))
-               }
-)
+                 plotTrajectory(c(5   ,4   ))
+               })
 dev.off(dev.cur())
 
 
-#################################33
+#################################
 # Single Peak
 #################################
 
@@ -89,8 +94,8 @@ W_bar = function(x) {
     dmvnorm(x, mean = c(3, 3), sigma = w_cov))
 }
 
-x <- seq(0, 6.5, 0.1) ## valores para mu
-y <- seq(0, 6, 0.1)
+x <- seq(0, 6.5, step) ## valores para mu
+y <- seq(-0.5, 6, step)
 X <- as.matrix( expand.grid(x, y))
 colnames(X) <- c("mu","var")
 Z <- vector()
@@ -99,10 +104,6 @@ for(i in 1:nrow(X)){
 }
 Z = exp(Z - log(sum(exp(Z))))
 b <- matrix(Z, length(x))
-
-es = eigen(cov2cor(G))$values
-v1 = sqrt(es[1])/1.2 * eigen(cov2cor(G))$vectors[,1]
-v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
 
 png("singlepeaklandscape.png", width = 1000, height = 900)
 filled.contour(x, y, z = b, color.palette = mypalette,
