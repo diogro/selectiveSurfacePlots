@@ -1,0 +1,38 @@
+---
+title: "Visualizing Fitness Surfaces"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# the problem
+
+I was writing a review article with a couple colaborators, and we were trying to ilustrate how 
+genetic covariation between traits could lead to macro evolutionary consequences. Our argument was
+that this is really dependant on the shape of the adaptive surface, and how this interacts with 
+within population variation. This is resonably complicated even in simple cases, so we wanted to have 
+a descent figure to ilustrate the effect of covariation on long term selection. 
+
+# plotting selection
+
+my first attempt at this was using inkscape, but it felt really forced, and I don't have the 
+illustrator skills to pull of a good looking figure if it's this complicated. I also felt like I was 
+cheating if I didn't explicitly calculate the population trajectories in the fitness landscape. I didn't
+think this would be a problem, but everyvody who looked at the drafts had something to say about the 
+trajectories, so I decided to use R and calculate everything, since people's intuition varied so much.
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
