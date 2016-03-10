@@ -46,9 +46,8 @@ v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
 gen = 15
 
 W_bar = function(x) {
-  
   a = 0.5
-  b = 0
+  b = 5
   # a * x -1 * y + b = 0
   dist = (a * x[1] - x[2] + b)/sqrt(a*a + 1)
   log(dnorm(dist, mean = 0, sd = w_cov))
@@ -66,10 +65,12 @@ Z = exp(Z - log(sum(exp(Z))))
 b <- matrix(Z, length(x))
 
 mypalette = colorRampPalette(c(wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
+png("ridgelandscape.png", width = 1080, height = 900)
 filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = { 
                  axis(1); 
                  axis(2);
-                 plotTrajectory(c(3,5))
+                 plotTrajectory(c(2,0))
                }
 )
+dev.off(dev.cur())
