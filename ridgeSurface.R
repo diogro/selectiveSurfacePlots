@@ -7,7 +7,7 @@ if(!require(wesanderson)) { install.packages("wesanderson"); library(wesanderson
 
 plotTrajectory <- function (start) {
   current_gen = start
-  polygon(ellipse(0.8, centre = current_gen, level = 0.3), col = wes_palette("Royal1")[1])
+  polygon(ellipse(0.1, centre = current_gen, level = 0.3), col = wes_palette("Royal1")[1])
   segments(current_gen[1] - v1[1], current_gen[2] - v1[2],
            current_gen[1] + v1[1], current_gen[2] + v1[2], lwd = 2)
   segments(current_gen[1] - v2[1], current_gen[2] - v2[2],
@@ -19,31 +19,31 @@ plotTrajectory <- function (start) {
     beta = grad(W_bar, t(current_gen))
     net_beta = net_beta + beta
     next_gen = current_gen + G%*%beta
-    arrows(current_gen[1], current_gen[2],
-           next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5, col = "black")
-    arrows(current_gen[1], current_gen[2],
-           current_gen[1] + beta[1]/5, current_gen[2] + beta[2]/5,
-           pch = 18, length = 0.14, lwd = 3, col = wes_palette("Rushmore")[3])
+    #arrows(current_gen[1], current_gen[2],
+    #       next_gen[1], next_gen[2], pch = 18, length = 0.14, lwd = 2.5, col = "black")
+    #arrows(current_gen[1], current_gen[2],
+    #       current_gen[1] + beta[1]/5, current_gen[2] + beta[2]/5,
+    #       pch = 18, length = 0.14, lwd = 3, col = wes_palette("Rushmore")[3])
     current_gen = next_gen
   }
   arrows(start[1], start[2],
          start[1] + net_beta[1]/5, start[2] + net_beta[2]/5,
          pch = 18, length = 0.14, lwd = 2.5, col = wes_palette("FantasticFox")[5])
-  #  net_delta = G %*% net_beta
-  #  arrows(start[1], start[2],
-  #         start[1] + net_delta[1], start[2] + net_delta[2],
-  #         pch = 18, length = 0.14, lwd = 2.5, col = 'black')
+    net_delta = G %*% net_beta
+    arrows(start[1], start[2],
+           start[1] + net_delta[1], start[2] + net_delta[2],
+           pch = 18, length = 0.14, lwd = 2.5, col = 'black')
 }
 
 #w_cov = matrix(c(1, 0.7, 0.7, 1), ncol = 2)
 w_cov = 1.3
-G = matrix(c(1, 0.8, 0.8, 1)/2, ncol = 2)
+G = matrix(c(1, 0.1, 0.1, 1)/2, ncol = 2)
 
 es = eigen(cov2cor(G))$values
 v1 = sqrt(es[1])/1.2 * eigen(cov2cor(G))$vectors[,1]
 v2 = sqrt(es[2])/1.2 * eigen(cov2cor(G))$vectors[,2]
 
-gen = 15
+gen = 3
 
 W_bar = function(x) {
   a = 0.5
@@ -64,8 +64,19 @@ for(i in 1:nrow(X)){
 Z = exp(Z - log(sum(exp(Z))))
 b <- matrix(Z, length(x))
 
-mypalette = colorRampPalette(c(wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
-png("ridgelandscape.png", width = 1080, height = 900)
+mypalette = colorRampPalette(c("white", wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
+png("ridgelandscape_uncorrelated.png", width = 1080, height = 900)
+filled.contour(x, y, z = b, color.palette = mypalette,
+               plot.axes = {
+                 axis(1);
+                 axis(2);
+                 plotTrajectory(c(2,0))
+               }
+)
+dev.off(dev.cur())
+
+mypalette = colorRampPalette(c("white", wes_palette(10, name = "Zissou", type = "continuous"), "darkred"))
+png("ridgelandscape_uncorrelated.png", width = 1080, height = 900)
 filled.contour(x, y, z = b, color.palette = mypalette,
                plot.axes = {
                  axis(1);
